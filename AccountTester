@@ -1,0 +1,110 @@
+/*
+Megan McElenney
+11 December 2017
+This code creates 5 bank accounts and then enacts 5 random transactions on the 
+bank accounts. Then an interst rate or fee is applied. Then the second and 
+fourth accounts are compared and checked for equality.
+
+Test Data:
+I tested this data by running the code several times and checking the math and 
+the results. The balance is printed after every transaction and after endOfMonth
+is applied making checking the math and results clear. 
+*/
+
+package accounttester;
+
+public class AccountTester 
+{
+    public static void main(String[] args) 
+    {
+        BankAccount [] accounts = new BankAccount[5];
+        for(int i = 0; i < accounts.length; i++)
+        {
+            if(i%2 == 0)
+                accounts[i] = new CheckingAccount(100*i);
+            else
+                accounts[i] = new SavingsAccount(200*i, i*.1);
+            
+        }
+        CheckingAccount acct1 = new CheckingAccount(500);
+        CheckingAccount acct2 = new CheckingAccount(500);
+        
+        for(BankAccount acct: accounts)
+        {
+            test(acct);
+        }
+       
+        System.out.println("End of month applied\n");
+        for(int i =0; i < accounts.length; i++)
+        {
+            accounts[i].endOfMonth();
+            System.out.println( i+1 + " " + accounts[i].toString());
+        }
+        
+        System.out.println("\n");
+        int compare = 0;
+        compare = ((SavingsAccount)accounts[1]).compareTo((SavingsAccount)
+                accounts[3]);
+        if(compare == 0)
+            System.out.println("The accounts are equal.");
+        if(compare > 0)
+            System.out.println("The second account is greater than the fourth.");
+        if(compare < 0)
+            System.out.println("The second account is less than the fourth.");
+        
+        System.out.println("\n");
+        boolean equals;
+        equals = acct1.equals(acct2);
+        if(equals == true)
+            System.out.println("Accounts 2 and 4 are equal.");
+        if(equals == false)
+            System.out.println("Accounts 2 and 4 are not equal.");
+        
+    }
+    public static void test(BankAccount account)
+    {   
+        for(int i = 0; i < 5; i++)
+        {
+            int random = 0;
+            random = (int) (Math.random() * 6 + 1);
+            if(random == 1)
+            {
+                account.deposit(500);
+                System.out.println("$500 has been deposited \n\t" + 
+                        account.toString());
+            }  
+            else if(random == 2)
+            {
+                account.deposit(35);
+                System.out.println("$35 has been deposited \n\t" + 
+                        account.toString());
+            }
+            else if(random == 3)
+            {
+                account.withdraw(400);
+                System.out.println("$400 has been withdrawn \n\t" +
+                        account.toString());
+            }
+            else if(random == 4)
+            {
+                account.deposit(300);
+                System.out.println("$300 has been deposited \n\t" + 
+                        account.toString());
+            }
+            else if(random == 5)
+            {
+                account.withdraw(70);
+                System.out.println("$400 has been withdrawn \n\t" + 
+                        account.toString());
+            }
+            else if(random == 6)
+            {
+                account.withdraw(5.5);
+                System.out.println("$5.50 has been withdrawn \n\t" + 
+                        account.toString());
+            }
+        }
+        System.out.println("Transactions completed \n\n");
+    }
+    
+}
