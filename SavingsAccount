@@ -1,0 +1,60 @@
+package accounttester;
+
+public class SavingsAccount extends BankAccount
+{
+    private double interestRate;
+    
+    public SavingsAccount()
+    {
+        super();
+        interestRate = 0.05;
+    }
+
+    public SavingsAccount(double amount, double iRate)
+    {
+        super(amount);
+        interestRate = iRate;
+    }
+    public void endOfMonth()
+    {
+        double balanceTemp = 0;
+        double newBalance = 0;
+        balanceTemp = getBalance();
+        newBalance = balanceTemp * interestRate;
+        deposit(newBalance);
+    }
+    
+    public int compareTo(SavingsAccount obj)
+    {
+        double balance = getBalance();
+        double objBalance = obj.getBalance();
+        if(Math.abs(balance - objBalance) <= .00001)
+            return 0;
+        if(balance < objBalance)
+            return -1;
+        if(balance > objBalance)
+            return 1;
+        else
+            return -1;
+    }
+    
+    public boolean equals(SavingsAccount obj)
+    {
+        double balance = this.getBalance();
+        double objBalance = obj.getBalance();
+        double iRate = this.interestRate;
+        double objIRate = obj.interestRate;
+        if(balance == objBalance)
+        {
+            if(iRate == objIRate)
+                return true;
+        }
+        return false;
+    }
+    public String toString()
+    {
+        double bal = getBalance();
+        return "Balance: $" + bal;
+    } 
+    
+}
