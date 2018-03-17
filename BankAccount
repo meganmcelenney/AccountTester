@@ -1,0 +1,38 @@
+package accounttester;
+
+public abstract class BankAccount 
+{
+    private double balance;
+    
+    public BankAccount()
+    {
+        balance = 0;
+    }
+    public BankAccount(double amount) 
+    {
+        balance = amount;
+    }
+    public void deposit (double amount)
+    {
+        balance += amount;
+    }
+    
+    public void withdraw (double amount)
+    {
+        balance -= amount;
+    }
+    
+    public double getBalance()
+    {
+        return balance;
+    }
+    
+    public String toString()
+    {
+        return "Balance = " + balance;
+    }
+
+    public abstract void endOfMonth();
+    
+    
+}
