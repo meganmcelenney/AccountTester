@@ -1,0 +1,44 @@
+package accounttester;
+public class CheckingAccount extends BankAccount
+{
+    public CheckingAccount()
+    {
+        super();
+    }
+    public CheckingAccount(double amount)
+    {
+        super(amount);
+    }
+    public void endOfMonth()
+    {
+        super.withdraw(5);
+    }
+    public boolean equals(CheckingAccount obj)
+    {
+        double balance = this.getBalance();
+        double objBalance = obj.getBalance();
+        if(balance == objBalance)
+        {
+            return true;
+        }
+        return false;
+    }
+    public int compareTo(CheckingAccount obj)
+    {
+        double balance = getBalance();
+        double objBalance = obj.getBalance();
+        if(Math.abs(balance - objBalance) <= .00001)
+            return 0;
+        if(balance < objBalance)
+            return -1;
+        if(balance > objBalance)
+            return 1;
+        else
+            return -1;
+    }
+    public String toString()
+    {
+        double bal = getBalance();
+        return "Balance: $" + bal;
+    } 
+}
